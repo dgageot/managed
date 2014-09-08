@@ -11,7 +11,7 @@ public class ServletCookies implements Cookies {
   private final List<javax.servlet.http.Cookie> cookies;
 
   public ServletCookies(javax.servlet.http.Cookie[] cookies) {
-    this.cookies = Arrays.asList(cookies);
+    this.cookies = (cookies == null) ? Collections.emptyList() : Arrays.asList(cookies);
   }
 
   @Override
@@ -74,7 +74,6 @@ public class ServletCookies implements Cookies {
     String value = value(name);
     return (value == null) ? defaultValue : Boolean.parseBoolean(value);
   }
-
 
   private Cookie create(javax.servlet.http.Cookie javaCookie) {
     return new NewCookie(javaCookie.getName(), javaCookie.getValue(), javaCookie.getPath()); // ?
