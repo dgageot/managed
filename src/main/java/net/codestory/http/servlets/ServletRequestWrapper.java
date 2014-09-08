@@ -4,6 +4,8 @@ import net.codestory.http.Cookies;
 import net.codestory.http.Part;
 import net.codestory.http.Query;
 import net.codestory.http.Request;
+import net.codestory.http.io.InputStreams;
+import org.apache.commons.io.Charsets;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class ServletRequestWrapper implements Request {
 
   @Override
   public String content() throws IOException {
-    return null; // TODO
+    return InputStreams.readString(request.getInputStream(), Charsets.toCharset(request.getCharacterEncoding()));
   }
 
   @Override
@@ -71,7 +73,7 @@ public class ServletRequestWrapper implements Request {
 
   @Override
   public Cookies cookies() {
-    return  new ServletCookies(request.getCookies());
+    return new ServletCookies(request.getCookies());
   }
 
   @Override
